@@ -4,6 +4,7 @@
 #include "window/window.h"
 #include "rendering/render.h"
 #include "input/input.h"
+#include "rendering/elements/text.h"
 
 int main(int argc, char* argv[]) {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -36,6 +37,11 @@ int main(int argc, char* argv[]) {
 		SDL_DestroyWindow(SDL_mainWindow);
 		SDL_Quit();
 		return 1;
+	}
+
+	// text
+	if (InitText() < 0) {
+		return -1;
 	}
 
 	while (running) {

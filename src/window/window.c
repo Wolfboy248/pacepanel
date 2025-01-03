@@ -7,10 +7,10 @@ void GetWindowInformation(SDL_Window* window) {
 
 SDL_Window* CreateContextMenu(SDL_Window* parentWindow) {
 	SDL_Window* childWindow = SDL_CreateWindow(
-		"Child Window",
-		SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED,
-		300, 100,
+		"Context Menu",
+		c_mouse.x + c_window.x,
+		c_mouse.y + c_window.y,
+		100, contextMenuButton.h,
 		SDL_WINDOW_BORDERLESS | SDL_WINDOW_ALWAYS_ON_TOP
 	);
 

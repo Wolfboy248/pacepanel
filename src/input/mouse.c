@@ -7,11 +7,6 @@ int dragOffsetX = 0;
 int dragOffsetY = 0;
 
 void MouseChecks() {
-	if (SDL_contextMenuWindow && (SDL_GetTicks() - childWindowTimer) > 5000) {
-		SDL_DestroyWindow(SDL_contextMenuWindow);
-		SDL_contextMenuWindow = NULL;
-	}
-
 	// printf("Mouse state: x: %d, y: %d, LMBDown: %d, RMBDown, %d, LMBClick: %d, RMBClick: %d\n", c_mouse.x, c_mouse.y, c_mouse.LMBDown, c_mouse.RMBDown, c_mouse.LMBClick, c_mouse.RMBClick);
 
 	if (c_mouse.LMBClick) {
@@ -68,10 +63,17 @@ void HandleMouseInput(SDL_Event event) {
 
 			// Context menu
 			if (!SDL_contextMenuWindow) {
+				contextMenuOpen = 1;
 				SDL_contextMenuWindow = CreateContextMenu(SDL_mainWindow);
-				childWindowTimer = SDL_GetTicks();
 			}
 		} else if (event.button.button == SDL_BUTTON_LEFT) {
+			if (contextMenuOpen) {
+				contextMenuOpen = 0;
+				SDL_DestroyWindow(SDL_contextMenuWindow);
+				SDL_contextMenuWindow = NULL;
+				return;
+			}
+
 			if (!c_mouse.LMBDown) {
 				c_mouse.LMBClick = 1;
 			}

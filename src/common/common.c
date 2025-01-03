@@ -9,6 +9,10 @@ I_Window c_window = {
 SDL_Window* SDL_mainWindow = NULL;
 SDL_Window* SDL_contextMenuWindow = NULL;
 
+// states 
+// context menu 
+int contextMenuOpen = 0;
+
 I_Mouse c_mouse = {
 	.LMBDown = 0,
 	.RMBDown = 0,

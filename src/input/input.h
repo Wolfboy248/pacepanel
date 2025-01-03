@@ -3,6 +3,10 @@
 
 #include "../common/common.h"
 
+#include "mouse.h"
+#include "keyboard.h"
+
+void InputPerFrameChecks();
 void HandleInput(SDL_Event event);
 
 #endif

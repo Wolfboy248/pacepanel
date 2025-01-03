@@ -6,9 +6,15 @@ I_Window c_window = {
 };
 
 // SDL stuff
-SDL_Window* SDL_childWindow = NULL;
+SDL_Window* SDL_mainWindow = NULL;
+SDL_Window* SDL_contextMenuWindow = NULL;
 
-I_Mouse c_mouse = {};
+I_Mouse c_mouse = {
+	.LMBDown = 0,
+	.RMBDown = 0,
+	.LMBClick = 0,
+	.RMBClick = 0
+};
 
 int running = 1;
 

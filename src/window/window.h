@@ -4,7 +4,8 @@
 #include "../common/common.h"
 
 void GetWindowInformation(SDL_Window* window);
-SDL_Window* CreateChildWindow(SDL_Window* parentWindow);
+SDL_Window* CreateContextMenu(SDL_Window* parentWindow);
+void CleanupWindows();
 
 #endif
 

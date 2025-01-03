@@ -2,6 +2,7 @@
 #include "common/common_functions.h"
 
 #include "window/window.h"
+#include "rendering/render.h"
 #include "input/input.h"
 
 int main(int argc, char* argv[]) {
@@ -10,7 +11,7 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-	SDL_Window* window = SDL_CreateWindow(
+	SDL_mainWindow = SDL_CreateWindow(
 		c_title,
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
@@ -19,22 +20,20 @@ int main(int argc, char* argv[]) {
 		SDL_WINDOW_BORDERLESS | SDL_WINDOW_RESIZABLE
 	);
 
-	if (!window) {
+	if (!SDL_mainWindow) {
 		SDL_Log("Failed to create window: %s", SDL_GetError());
 		SDL_Quit();
 		return 1;
 	}
 
-	Uint32 child_window_timer = 0;
-
 	printf("Starting %s\n", c_title);
 	SDL_Event event;
 
 	// renderer setup
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	SDL_Renderer* renderer = SDL_CreateRenderer(SDL_mainWindow, -1, SDL_RENDERER_ACCELERATED);
 	if (!renderer) {
 		SDL_Log("Error creating renderer! Error: %s", SDL_GetError());
-		SDL_DestroyWindow(window);
+		SDL_DestroyWindow(SDL_mainWindow);
 		SDL_Quit();
 		return 1;
 	}
@@ -44,19 +43,13 @@ int main(int argc, char* argv[]) {
 			HandleInput(event);
 		}
 
-		// Render stuff
-		SDL_SetRenderDrawColor(renderer, 12, 12, 24, 255);
-		SDL_RenderClear(renderer);
+		GetWindowInformation(SDL_mainWindow);
+		InputPerFrameChecks();
 
-		GetWindowInformation(window);
-
-		SDL_RenderPresent(renderer);
+		RenderWindows(renderer);
 	}
 
-	if (SDL_childWindow) {
-		SDL_DestroyWindow(SDL_childWindow);
-	}
-	SDL_DestroyWindow(window);
+	CleanupWindows();
 	SDL_Quit();
 
 	return 0;

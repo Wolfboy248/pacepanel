@@ -1,5 +1,8 @@
 #include "input.h"
-#include "mouse.h"
+
+void InputPerFrameChecks() {
+	MouseChecks();
+}
 
 void HandleInput(SDL_Event event) {
 	if (event.type == SDL_QUIT) {
@@ -7,5 +10,6 @@ void HandleInput(SDL_Event event) {
 	}
 
 	HandleMouseInput(event);
+	HandleKeyboardInput(event);
 };
 

@@ -10,10 +10,12 @@ typedef struct {
 
 typedef struct {
 	int x, y;
+	int LMBDown, RMBDown, LMBClick, RMBClick;
 } I_Mouse;
 
 // SDL stuff
-extern SDL_Window* SDL_childWindow;
+extern SDL_Window* SDL_mainWindow;
+extern SDL_Window* SDL_contextMenuWindow;
 
 extern I_Window c_window;
 extern I_Mouse c_mouse;

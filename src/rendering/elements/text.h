@@ -10,7 +10,7 @@ typedef struct {
 
 int InitText();
 Text CreateText();
-void DrawText(Text textStruct, SDL_Renderer* renderer);
+void DrawText(Text* textStruct, SDL_Renderer* renderer);
 void FreeText();
 
 #endif

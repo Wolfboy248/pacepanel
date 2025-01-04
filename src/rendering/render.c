@@ -1,5 +1,6 @@
 #include "render.h"
 #include "renderContextMenu.h"
+#include "renderDebugWindow.h"
 #include "elements/text.h"
 
 void RenderMainWindow(SDL_Renderer* renderer) {
@@ -8,12 +9,15 @@ void RenderMainWindow(SDL_Renderer* renderer) {
 
 	Text testText = CreateText();
 	testText.text = "HELLO";
-	DrawText(testText, renderer);
+	DrawText(&testText, renderer);
 
 	SDL_RenderPresent(renderer);
 }
 
 void RenderWindows(SDL_Renderer* renderer) {
+	if (debugMode) {
+		RenderDebugWindow();
+	}
 	if (contextMenuOpen) {
 		RenderContextMenu();
 	}	

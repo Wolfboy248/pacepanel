@@ -6,12 +6,15 @@ typedef struct {
 	enum CMDs cmd;
 } ContextMenuButtonE;
 
+// CONTEXT BUTTON STYLE //
+// w = 120
+// h = 20
 ContextMenuButtonE buttons[] = {
 	{"Quit", CMD_Quit},
 };
 
 void RenderContextMenu() {
-	SDL_SetRenderDrawColor(c_contextMenuWindow.renderer, 12, 12, 24, 255);
+	SDL_SetRenderDrawColor(c_contextMenuWindow.renderer, 12, 12, 24, 0);
 
 	SDL_RenderClear(c_contextMenuWindow.renderer);
 	
@@ -19,6 +22,9 @@ void RenderContextMenu() {
 	Text contextMenuButtonText = {
 		.fontSize = 12,
 		.fontPath = "fonts/JetBrainsMonoNerdFont-Medium.ttf",
+		.textAlignH = LEFT,
+		.textAlignV = MIDDLE,
+		.paddingL = 4,
 	};
 
 	int buttonsLength = sizeof(buttons) / sizeof(buttons[0]);

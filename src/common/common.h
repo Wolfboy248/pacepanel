@@ -48,6 +48,7 @@ typedef struct {
 // SDL stuff
 extern SDL_Window* SDL_mainWindow;
 extern SDL_Window* SDL_contextMenuWindow;
+extern SDL_Window* SDL_debugWindow;
 
 // states
 // context menu
@@ -55,9 +56,12 @@ extern int contextMenuOpen;
 
 extern I_Window c_window;
 extern I_Window c_contextMenuWindow;
+extern I_Window c_debugWindow;
+
 extern I_Mouse c_mouse;
 
 extern int running;
+extern int debugMode;
 
 extern const char* c_title;
 

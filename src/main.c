@@ -12,6 +12,10 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
+	if (debugMode) {
+		SDL_debugWindow = CreateDebugWindow(SDL_mainWindow);
+	}
+
 	SDL_mainWindow = SDL_CreateWindow(
 		c_title,
 		SDL_WINDOWPOS_CENTERED,
@@ -40,6 +44,7 @@ int main(int argc, char* argv[]) {
 		SDL_Quit();
 		return 1;
 	}
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
 	// text
 	if (InitText() < 0) {

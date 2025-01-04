@@ -8,6 +8,7 @@ I_Window c_window = {
 // SDL stuff
 SDL_Window* SDL_mainWindow = NULL;
 SDL_Window* SDL_contextMenuWindow = NULL;
+SDL_Window* SDL_debugWindow = NULL;
 
 // states 
 // context menu 
@@ -19,6 +20,14 @@ I_Window c_contextMenuWindow = {
 	.windowTitle = "Context Menu",
 };
 
+I_Window c_debugWindow = {
+	.windowTitle = "Debug",
+	.x = 0,
+	.y = 0,
+	.w = 200,
+	.h = 50,
+};
+
 I_Mouse c_mouse = {
 	.LMBDown = 0,
 	.RMBDown = 0,
@@ -27,6 +36,7 @@ I_Mouse c_mouse = {
 };
 
 int running = 1;
+int debugMode = 1;
 
 const char* c_title = "PacePanel";
 

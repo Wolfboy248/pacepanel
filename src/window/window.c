@@ -7,8 +7,8 @@ void GetWindowInformation(SDL_Window* window) {
 
 SDL_Window* CreateContextMenu(SDL_Window* parentWindow) {
 	int x, y;
-	x = c_mouse.x + c_window.x - 20;
-	y = c_mouse.y + c_window.y - 20;
+	x = c_mouse.x + c_window.x;
+	y = c_mouse.y + c_window.y;
 	c_contextMenuWindow.x = x;
 	c_contextMenuWindow.y = y;
 	SDL_Window* childWindow = SDL_CreateWindow(
@@ -22,9 +22,10 @@ SDL_Window* CreateContextMenu(SDL_Window* parentWindow) {
 	SDL_Renderer* contextMenuRenderer = SDL_CreateRenderer(c_contextMenuWindow.window, -1, SDL_RENDERER_ACCELERATED);
 	if (!contextMenuRenderer) {
 		SDL_Log("Error creating renderer! Error: %s", SDL_GetError());
-		SDL_DestroyWindow(SDL_mainWindow);
+		SDL_DestroyWindow(SDL_contextMenuWindow);
 		SDL_Quit();
 	}
+	SDL_SetRenderDrawBlendMode(contextMenuRenderer, SDL_BLENDMODE_BLEND);
 	c_contextMenuWindow.renderer = contextMenuRenderer;
 
 	if (!childWindow) {
@@ -35,9 +36,39 @@ SDL_Window* CreateContextMenu(SDL_Window* parentWindow) {
 	return childWindow;
 }
 
+SDL_Window* CreateDebugWindow(SDL_Window* parentWindow) {
+	SDL_Window* childWindow = SDL_CreateWindow(
+		c_debugWindow.windowTitle,
+		c_debugWindow.x,
+		c_debugWindow.y,
+		c_debugWindow.w, c_debugWindow.h,
+		SDL_WINDOW_BORDERLESS | SDL_WINDOW_ALWAYS_ON_TOP
+	);
+	c_debugWindow.window = childWindow;
+
+	SDL_Renderer* debugRenderer = SDL_CreateRenderer(c_debugWindow.window, -1, SDL_RENDERER_ACCELERATED);
+	if (!debugRenderer) {
+		SDL_Log("Error creating renderer! Error: %s", SDL_GetError());
+		SDL_DestroyWindow(SDL_debugWindow);
+		SDL_Quit();
+	}
+	SDL_SetRenderDrawBlendMode(debugRenderer, SDL_BLENDMODE_BLEND);
+	c_debugWindow.renderer = debugRenderer;
+
+	if (!childWindow) {
+		SDL_Log("Error creating child window! Error: %s", SDL_GetError());
+		return NULL;
+	}
+
+	return childWindow;
+}
+
 void CleanupWindows() {
+	if (debugMode) {
+		SDL_DestroyWindow(c_debugWindow.window);
+	}
 	if (SDL_contextMenuWindow) {
-		SDL_DestroyWindow(SDL_contextMenuWindow);
+		SDL_DestroyWindow(c_contextMenuWindow.window);
 	}
 	SDL_DestroyWindow(SDL_mainWindow);
 }

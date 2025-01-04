@@ -36,14 +36,18 @@ void DrawButton(Button button, I_Window desiredWindow, SDL_Renderer* renderer) {
 		}
 	}
 
+	// alignment stuff
+	button.text.w = button.w;
+	button.text.h = button.h;
+
 	if (IsButtonHover(desiredWindow, button)) {
-		DrawRect(button.x, button.y, button.w, button.h, button.bgColorH, renderer);		
+		DrawRect(button.x, button.y, button.w, button.h, button.bgColorH, renderer);
 		button.text.color = button.textColorH;
-		DrawText(button.text, renderer);
+		DrawText(&button.text, renderer);
 	} else {
 		DrawRect(button.x, button.y, button.w, button.h, button.bgColor, renderer);
 		button.text.color = button.textColor;
-		DrawText(button.text, renderer);
+		DrawText(&button.text, renderer);
 	}
 }
 

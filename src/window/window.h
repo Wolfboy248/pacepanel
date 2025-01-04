@@ -6,6 +6,7 @@
 
 void GetWindowInformation(SDL_Window* window);
 SDL_Window* CreateContextMenu(SDL_Window* parentWindow);
+SDL_Window* CreateDebugWindow(SDL_Window* parentWindow);
 void CleanupWindows();
 
 #endif

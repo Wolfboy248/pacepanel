@@ -14,7 +14,9 @@ void RenderMainWindow(SDL_Renderer* renderer) {
 }
 
 void RenderWindows(SDL_Renderer* renderer) {
-	RenderContextMenu();
+	if (contextMenuOpen) {
+		RenderContextMenu();
+	}	
 	RenderMainWindow(renderer);
 }
 

@@ -5,12 +5,32 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
+enum CMDs {
+	CMD_Invalid,
+	CMD_Quit,
+};
+
+enum alignH {
+	LEFT,
+	CENTER,
+	RIGHT
+};
+
+enum alignV {
+	TOP,
+	MIDDLE,
+	BOTTOM
+};
+
 typedef struct {
 	int x, y, w, h;
+	const char* windowTitle;
+	SDL_Window* window;
+	SDL_Renderer* renderer;
 } I_Window;
 
 typedef struct {
-	int x, y;
+	int x, y, absX, absY;
 	int LMBDown, RMBDown, LMBClick, RMBClick;
 } I_Mouse;
 
@@ -18,6 +38,10 @@ typedef struct {
 	const char* text;
 	const char* fontPath;
 	int x, y, fontSize;
+	int w, h;
+	int paddingL, paddingR, paddingT, paddingB;
+	enum alignV textAlignV;
+	enum alignH textAlignH;
 	SDL_Color color;
 } Text;
 
@@ -30,6 +54,7 @@ extern SDL_Window* SDL_contextMenuWindow;
 extern int contextMenuOpen;
 
 extern I_Window c_window;
+extern I_Window c_contextMenuWindow;
 extern I_Mouse c_mouse;
 
 extern int running;

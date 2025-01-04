@@ -13,6 +13,12 @@ SDL_Window* SDL_contextMenuWindow = NULL;
 // context menu 
 int contextMenuOpen = 0;
 
+I_Window c_contextMenuWindow = {
+	.w = 100,
+	.h = 32,
+	.windowTitle = "Context Menu",
+};
+
 I_Mouse c_mouse = {
 	.LMBDown = 0,
 	.RMBDown = 0,

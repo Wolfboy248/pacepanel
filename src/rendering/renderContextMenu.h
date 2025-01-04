@@ -2,7 +2,9 @@
 #define RENDERCONTEXTMENU_H
 
 #include "../common/common.h"
+#include "../common/common_functions.h"
 
+void CreateContextMenuRenderer();
 void RenderContextMenu();
 
 #endif

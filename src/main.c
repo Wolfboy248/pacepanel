@@ -27,6 +27,8 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
+	c_window.window = SDL_mainWindow;
+
 	printf("Starting %s\n", c_title);
 	SDL_Event event;
 
@@ -50,9 +52,9 @@ int main(int argc, char* argv[]) {
 		}
 
 		GetWindowInformation(SDL_mainWindow);
-		InputPerFrameChecks();
 
 		RenderWindows(renderer);
+		InputPerFrameChecks();
 	}
 
 	CleanupWindows();

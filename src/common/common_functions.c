@@ -24,3 +24,22 @@ char* format(const char* format, ...) {
 	return buffer;
 }
 
+void SetWindowPosition(int x, int y, I_Window* window) {
+	window->x = x;
+	window->y = y;
+	SDL_SetWindowPosition(window->window, x, y);
+}
+
+void SetWindowDimensions(int w, int h, I_Window* window) {
+	window->w = w;
+	window->h = h;
+	SDL_SetWindowSize(window->window, w, h);
+}
+
+void A_Quit() {
+	int changes = 0;
+	if (!changes) {
+		running = 0;
+	}
+}
+

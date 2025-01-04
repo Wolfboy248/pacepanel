@@ -3,20 +3,17 @@
 
 #include "common.h"
 
-enum textAlign {
-	LEFT,
-	CENTER,
-	RIGHT
-};
-
 typedef struct {
-	int x, y, w, h, fontSize;
+	int x, y, w, h;
 	SDL_Color textColor, bgColor, textColorH, bgColorH;
-	const char* text;
-	const char* fontPath;
-	enum textAlign alignment;
+	Text text;
+	enum alignH alignmentH;
+	enum alignV alignmentV;
+	int paddingL, paddingR, paddingT, paddingB;
+	enum CMDs cmd;
 } Button;
 
+extern Text contextMenuButtonText;
 extern Button contextMenuButton;
 
 #endif	

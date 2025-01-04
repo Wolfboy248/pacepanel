@@ -4,6 +4,10 @@
 #include "common.h"
 
 char* format(const char* format, ...);
+void SetWindowPosition(int x, int y, I_Window* window);
+void SetWindowDimensions(int w, int h, I_Window* window);
+
+void A_Quit();
 
 #endif
 

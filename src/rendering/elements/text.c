@@ -38,6 +38,11 @@ Text CreateText() {
 	return defaultText;
 }
 
+void SetTextSize(Text* textStruct, int w, int h) {
+	textStruct->w = w;
+	textStruct->h = h;
+}
+
 void DrawText(Text textStruct, SDL_Renderer* renderer) {
 	Font* textObj = LoadFont(textStruct.fontPath, textStruct.fontSize);
 	if (!textObj) {
@@ -57,8 +62,16 @@ void DrawText(Text textStruct, SDL_Renderer* renderer) {
 		printf("Unable to create texture from surface! Error: %s\n", TTF_GetError());
 	}
 
+	int posX = textStruct.x + textStruct.paddingL;
+	int posY = textStruct.y + textStruct.paddingT;
+	if (textStruct.textAlignH == CENTER) {
+		posX = textStruct.x;
+	}
 	SDL_Rect dstRect = { textStruct.x, textStruct.y, textSurface->w, textSurface->h };
 	SDL_RenderCopy(renderer, textTexture, NULL, &dstRect);
+
+	SetTextSize(&textStruct, textSurface->w, textSurface->h);
+	// SDL_Log("%d, %d", textStruct.w, textStruct.h);
 
 	SDL_FreeSurface(textSurface);
 	SDL_DestroyTexture(textTexture);

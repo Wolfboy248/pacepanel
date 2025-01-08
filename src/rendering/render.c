@@ -3,7 +3,12 @@
 #include "renderDebugWindow.h"
 #include "renderSettingsWindow.h"
 #include "elements/text.h"
+#include "components/componentHandler.h"
 #include "../debug/debug.h"
+
+void InitRendering() {
+	LoadComponent("./src/components/component.timer/timer_component.so");
+}
 
 void RenderMainWindow(SDL_Renderer* renderer) {
 	SDL_SetRenderDrawColor(renderer, 12, 12, 24, 255);
@@ -14,10 +19,12 @@ void RenderMainWindow(SDL_Renderer* renderer) {
 	debugTimer.y = 20;
 	debugTimer.text = format("%d", t_realTime.elapsed.total);
 	timerText.text = t_realTime.formattedString;
-	DrawText(&timerText, renderer);
-	DrawText(&debugTimer, renderer);
+	// DrawText(&timerText, renderer);
+	// DrawText(&debugTimer, renderer);
+
+	RenderComponents();
 	
-	debugValues[1].value = intToChar(c_mouse.x);
+	// debugValues[1].value = intToChar(c_mouse.x);
 
 	SDL_RenderPresent(renderer);
 }

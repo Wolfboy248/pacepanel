@@ -1,5 +1,5 @@
 #include "common/common.h"
-#include "common/common_functions.h"
+#include "common/common_elements.h"
 
 #include "window/window.h"
 #include "rendering/render.h"
@@ -49,6 +49,11 @@ int main(int argc, char* argv[]) {
 	}
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
+	// component context
+	componentContext.renderer = renderer;
+
+	InitRendering();
+
 	InitTimer();
 
 	// text
@@ -72,6 +77,7 @@ int main(int argc, char* argv[]) {
 
 	// CleanupInput();
 	CleanupWindows();
+	CleanupComponent(&componentContext);
 	SDL_Quit();
 
 	return 0;

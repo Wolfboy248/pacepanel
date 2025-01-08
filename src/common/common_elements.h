@@ -2,6 +2,7 @@
 #define COMMONELEMENTS_H
 
 #include "common.h"
+#include "../components/component.h"
 
 typedef struct {
 	int x, y, w, h;
@@ -15,6 +16,8 @@ typedef struct {
 
 extern Text contextMenuButtonText;
 extern Button contextMenuButton;
+
+extern ComponentContext componentContext;
 
 #endif	
 

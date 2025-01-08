@@ -4,6 +4,7 @@
 #include "../common/common.h"
 #include "../common/common_timer.h"
 
+void InitRendering();
 void RenderWindows(SDL_Renderer* renderer);
 
 #endif

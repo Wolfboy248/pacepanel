@@ -6,7 +6,19 @@ OS=$(uname)
 # Set common flags
 SRC_FILES=$(find . -name '*.c')
 OUT_FILE="pacePanel"
-COMMON_FLAGS="-lSDL2 -lSDL2_ttf"
+COMMON_FLAGS="-lSDL2 -lSDL2_ttf -rdynamic"
+
+COMPILE_LIB_SCRIPTS=$(find . -name 'compileLib.sh')
+
+for script in $COMPILE_LIB_SCRIPTS; do
+	echo "Compiling $script..."
+	dir=$(dirname "$script")
+	bash "$script" "$dir"
+done
+
+echo ""
+echo "////// COMPILATION OF COMPONENT LIBRARIES COMPLETED //////"
+echo ""
 
 # OS-specific compilation flags
 if [[ "$OS" == "Linux" ]]; then

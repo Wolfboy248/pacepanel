@@ -14,3 +14,7 @@ Button contextMenuButton = {
 	.alignmentV = MIDDLE
 };
 
+ComponentContext componentContext = {
+	
+};
+

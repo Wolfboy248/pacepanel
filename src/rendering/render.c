@@ -9,9 +9,13 @@ void RenderMainWindow(SDL_Renderer* renderer) {
 	SDL_SetRenderDrawColor(renderer, 12, 12, 24, 255);
 	SDL_RenderClear(renderer);
 
-	Text testText = CreateText();
-	testText.text = "HELLO";
-	DrawText(&testText, renderer);
+	Text timerText = CreateText();
+	Text debugTimer = CreateText();
+	debugTimer.y = 20;
+	debugTimer.text = format("%d", t_realTime.elapsed.total);
+	timerText.text = t_realTime.formattedString;
+	DrawText(&timerText, renderer);
+	DrawText(&debugTimer, renderer);
 	
 	debugValues[1].value = intToChar(c_mouse.x);
 

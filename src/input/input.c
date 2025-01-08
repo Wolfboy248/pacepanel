@@ -1,5 +1,30 @@
 #include "input.h"
 
+SDL_Thread* hotKeyThread;
+
+void InitInput() {
+#ifdef _WIN32
+	printf("Initalizing input for windows\n");
+	RegisterGlobalHotkey();
+#elif __linux__
+	printf("Initalizing input for linux\n");
+	RegisterGlobalHotkey();
+#elif __APPLE__
+	printf("Initalizing input for mac\n");
+	RegisterGlobalHotkey();
+#endif
+	
+	//hotKeyThread = SDL_CreateThread(
+	//	(int (*)(void*))ListenForGlobalHotkey,
+	//	"HotkeyListener",
+	//	NULL
+	//);
+}
+
+void CleanupInput() {
+	// SDL_WaitThread(hotKeyThread, NULL);
+}
+
 void InputPerFrameChecks() {
 	MouseChecks();
 }

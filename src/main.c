@@ -5,6 +5,7 @@
 #include "rendering/render.h"
 #include "input/input.h"
 #include "rendering/elements/text.h"
+#include "timing/timer.h"
 
 int main(int argc, char* argv[]) {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -33,6 +34,8 @@ int main(int argc, char* argv[]) {
 
 	c_window.window = SDL_mainWindow;
 
+	// InitInput();
+
 	printf("Starting %s\n", c_title);
 	SDL_Event event;
 
@@ -46,6 +49,8 @@ int main(int argc, char* argv[]) {
 	}
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
+	InitTimer();
+
 	// text
 	if (InitText() < 0) {
 		return -1;
@@ -57,11 +62,15 @@ int main(int argc, char* argv[]) {
 		}
 
 		GetWindowInformation(SDL_mainWindow);
+		HandleTimer();
+
+		SDL_Delay(1000 / 60);
 
 		RenderWindows(renderer);
 		InputPerFrameChecks();
 	}
 
+	// CleanupInput();
 	CleanupWindows();
 	SDL_Quit();
 

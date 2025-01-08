@@ -1,4 +1,5 @@
 #include "button.h"
+#include "../../window/settingsWindow.h"
 
 int IsButtonHover(I_Window desiredWindow, Button button) {
 	int isHover;
@@ -29,6 +30,9 @@ void DrawButton(Button button, I_Window desiredWindow, SDL_Renderer* renderer) {
 		switch (button.cmd) {
 			case CMD_Quit:
 				A_Quit();
+				break;
+			case CMD_OpenSettings:
+				OpenSettings();
 				break;
 			default:
 				printf("Invalid command\n");

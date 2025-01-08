@@ -11,7 +11,7 @@ typedef struct {
 extern DebugValue debugValues[];
 extern int debugValuesLen;
 
-void AddDebugValue(const char* name, const char* value);
+void AddDebugValue(const char* name, char* value);
 
 #endif
 

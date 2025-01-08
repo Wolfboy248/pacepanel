@@ -1,5 +1,6 @@
 #include "renderContextMenu.h"
 #include "elements/button.h"
+#include "../debug/debug.h"
 
 typedef struct {
 	const char* text;
@@ -10,11 +11,12 @@ typedef struct {
 // w = 120
 // h = 20
 ContextMenuButtonE buttons[] = {
+	{"Settings", CMD_OpenSettings},
 	{"Quit", CMD_Quit},
 };
 
 void RenderContextMenu() {
-	SDL_SetRenderDrawColor(c_contextMenuWindow.renderer, 12, 12, 24, 0);
+	SDL_SetRenderDrawColor(c_contextMenuWindow.renderer, 12, 12, 24, 255);
 
 	SDL_RenderClear(c_contextMenuWindow.renderer);
 	
@@ -39,6 +41,7 @@ void RenderContextMenu() {
 		newContextButton.cmd = buttons[i].cmd;
 		DrawButton(newContextButton, c_contextMenuWindow, c_contextMenuWindow.renderer);
 	}
+
 
 	if (contextMenuOpen && c_mouse.LMBClick) {
 		contextMenuOpen = 0;

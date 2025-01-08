@@ -6,6 +6,7 @@
 char* format(const char* format, ...);
 void SetWindowPosition(int x, int y, I_Window* window);
 void SetWindowDimensions(int w, int h, I_Window* window);
+char* intToChar(int num);
 
 void A_Quit();
 

@@ -8,6 +8,7 @@
 enum CMDs {
 	CMD_Invalid,
 	CMD_Quit,
+	CMD_OpenSettings,
 };
 
 enum alignH {
@@ -27,6 +28,7 @@ typedef struct {
 	const char* windowTitle;
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+	int isOpen;
 } I_Window;
 
 typedef struct {
@@ -49,6 +51,8 @@ typedef struct {
 extern SDL_Window* SDL_mainWindow;
 extern SDL_Window* SDL_contextMenuWindow;
 extern SDL_Window* SDL_debugWindow;
+extern SDL_Window* SDL_settingsWindow;
+extern SDL_Window* SDL_prevFocusedWindow;
 
 // states
 // context menu
@@ -57,6 +61,7 @@ extern int contextMenuOpen;
 extern I_Window c_window;
 extern I_Window c_contextMenuWindow;
 extern I_Window c_debugWindow;
+extern I_Window c_settingsWindow;
 
 extern I_Mouse c_mouse;
 

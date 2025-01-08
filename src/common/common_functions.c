@@ -36,6 +36,17 @@ void SetWindowDimensions(int w, int h, I_Window* window) {
 	SDL_SetWindowSize(window->window, w, h);
 }
 
+char* intToChar(int num) {
+	char* buffer = malloc(12 * sizeof(char));
+	if (buffer == NULL) {
+		printf("Mem alloc failed!\n");
+		return NULL;
+	}
+
+	snprintf(buffer, 12, "%d", num);
+	return buffer;
+}
+
 void A_Quit() {
 	int changes = 0;
 	if (!changes) {

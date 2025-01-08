@@ -8,6 +8,17 @@ int dragOffsetY = 0;
 
 int contextMenuReady = 0;
 
+enum WindowClickAreas {
+	LEFT_SIDE,
+	BODY,
+	RIGHT_SIDE
+};
+
+enum WindowClickAreas windowClickArea;
+enum WindowClickAreas windowHoverArea;
+int startWindowW;
+int dragSize = 10;
+
 void MouseChecks() {
 	// printf("Mouse state: x: %d, y: %d, LMBDown: %d, RMBDown, %d, LMBClick: %d, RMBClick: %d\n", c_mouse.x, c_mouse.y, c_mouse.LMBDown, c_mouse.RMBDown, c_mouse.LMBClick, c_mouse.RMBClick);
 	
@@ -18,6 +29,17 @@ void MouseChecks() {
 	if (c_mouse.LMBClick) {
 		dragOffsetX = c_mouse.x;
 		dragOffsetY = c_mouse.y;
+
+		startWindowW = c_window.w;
+
+		if (c_mouse.x <= dragSize) {
+			windowClickArea = LEFT_SIDE;
+		} else if (c_mouse.x >= c_window.w - dragSize) {
+			windowClickArea = RIGHT_SIDE;
+		} else {
+			windowClickArea = BODY;
+		}
+
 		c_mouse.LMBClick = 0;
 	}
 
@@ -38,10 +60,31 @@ void HandleMouseInput(SDL_Event event) {
 		c_mouse.x = event.motion.x;
 		c_mouse.y = event.motion.y;
 
+		if (c_mouse.x <= dragSize) {
+			windowHoverArea = LEFT_SIDE;
+		} else if (c_mouse.x >= c_window.w - dragSize) {
+			windowHoverArea = RIGHT_SIDE;
+		} else {
+			windowHoverArea = BODY;
+		}
+
+		if (windowHoverArea != BODY) {
+			SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_SIZEWE));
+		} else {
+			SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW));
+		}
+
 		if (dragging) {
 			// printf("MouseX Abs: %d, DragOffsetX: %d, RelativeMov: %d\n", c_mouse.x + c_window.x, dragOffsetX, c_mouse.x - dragOffsetX + c_window.x);
 			// SDL_SetWindowPosition(SDL_mainWindow, c_mouse.x - dragOffsetX + c_window.x, c_mouse.y - dragOffsetY + c_window.y);
-			SetWindowPosition(c_mouse.x - dragOffsetX + c_window.x, c_mouse.y - dragOffsetY + c_window.y, &c_window);
+			if (windowClickArea == BODY) {
+				SetWindowPosition(c_mouse.absX - dragOffsetX, c_mouse.absY - dragOffsetY, &c_window);
+			} else if (windowClickArea == RIGHT_SIDE) {
+				SetWindowDimensions(c_mouse.absX - c_window.x, c_window.h, &c_window);
+			} else if (windowClickArea == LEFT_SIDE) {
+				SetWindowDimensions((c_window.x + c_window.w) - c_mouse.absX, c_window.h, &c_window);
+				SetWindowPosition(c_mouse.absX, c_window.y, &c_window);
+			}
 		} else {
 			// printf("MouseX Abs: %d\n", c_mouse.x + c_window.x);
 		}

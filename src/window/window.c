@@ -36,6 +36,34 @@ SDL_Window* CreateContextMenu(SDL_Window* parentWindow) {
 	return childWindow;
 }
 
+SDL_Window* CreateSettingsWindow(SDL_Window* parentWindow) {
+	SDL_Window* childWindow = SDL_CreateWindow(
+		c_settingsWindow.windowTitle,
+		c_settingsWindow.x,
+		c_settingsWindow.y,
+		c_settingsWindow.w, c_settingsWindow.h,
+		SDL_WINDOW_ALWAYS_ON_TOP | SDL_WINDOW_MAXIMIZED
+	);
+	c_settingsWindow.window = childWindow;
+
+	SDL_Renderer* settingsWindowRenderer = SDL_CreateRenderer(c_settingsWindow.window, -1, SDL_RENDERER_ACCELERATED);
+	if (!settingsWindowRenderer) {
+		SDL_Log("Error creating settings renderer! Error: %s", SDL_GetError());
+		SDL_DestroyWindow(c_settingsWindow.window);
+		SDL_Quit();
+	}
+
+	SDL_SetRenderDrawBlendMode(settingsWindowRenderer, SDL_BLENDMODE_BLEND);
+	c_settingsWindow.renderer = settingsWindowRenderer;
+
+	if (!childWindow) {
+		SDL_Log("Error creating child window! Error: %s", SDL_GetError());
+		return NULL;
+	}
+
+	return childWindow;
+}
+
 SDL_Window* CreateDebugWindow(SDL_Window* parentWindow) {
 	SDL_Window* childWindow = SDL_CreateWindow(
 		c_debugWindow.windowTitle,

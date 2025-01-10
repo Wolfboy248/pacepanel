@@ -1,4 +1,5 @@
 #include "componentHandler.h"
+#include "../../components/component.h"
 #ifdef __linux__
 #include <dlfcn.h>
 #elif _WIN32

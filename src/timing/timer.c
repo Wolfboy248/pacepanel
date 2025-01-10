@@ -1,25 +1,5 @@
 #include "timer.h"
 
-void InitTimer() {
-	t_realTime.formattedString = "0";
-}
-
-void StartTimer() {
-	t_realTime.startTime = 0;
-	// t_realTime.startTime = 3595999;
-	t_realTime.timeStarted = SDL_GetTicks();
-	t_realTime.running = 1;
-}
-
-void ResetTimer() {
-	t_realTime.elapsed.total = 0;
-	t_realTime.running = 0;
-}
-
-void StopTimer() {
-	t_realTime.running = 0;
-}
-
 void FormatValues(T_Timer* timer) {
 	timer->elapsed.s = timer->elapsed.total / 1000 % 60;
 	timer->elapsed.ms = timer->elapsed.total % 1000;
@@ -57,6 +37,27 @@ void FormatValues(T_Timer* timer) {
 	}
 
 	timer->formattedString = formattedValue;
+}
+
+void InitTimer() {
+	FormatValues(&t_realTime);
+}
+
+void StartTimer() {
+	t_realTime.startTime = 0;
+	// t_realTime.startTime = 3595999;
+	t_realTime.timeStarted = SDL_GetTicks();
+	t_realTime.running = 1;
+}
+
+void ResetTimer() {
+	t_realTime.elapsed.total = 0;
+	FormatValues(&t_realTime);
+	t_realTime.running = 0;
+}
+
+void StopTimer() {
+	t_realTime.running = 0;
 }
 
 void HandleTimer() {

@@ -4,9 +4,9 @@
 OS=$(uname)
 
 # Set common flags
-SRC_FILES=$(find . -name '*.c')
+SRC_FILES=$(find . -name '*.c' ! -path './src/components/*')
 OUT_FILE="pacePanel"
-COMMON_FLAGS="-lSDL2 -lSDL2_ttf -rdynamic"
+COMMON_FLAGS="-lSDL2 -lSDL2_ttf -rdynamic -ldl"
 
 COMPILE_LIB_SCRIPTS=$(find . -name 'compileLib.sh')
 
@@ -37,7 +37,7 @@ fi
 
 # Compile the program
 echo "Compiling with flags: $COMMON_FLAGS $EXTRA_FLAGS"
-gcc -o "$OUT_FILE" $SRC_FILES $COMMON_FLAGS $EXTRA_FLAGS
+gcc -Wall -o "$OUT_FILE" $SRC_FILES $COMMON_FLAGS $EXTRA_FLAGS
 
 # Run the program if compilation is successful
 if [[ $? -eq 0 ]]; then

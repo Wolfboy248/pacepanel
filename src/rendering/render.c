@@ -7,7 +7,7 @@
 #include "../debug/debug.h"
 
 void InitRendering() {
-	LoadComponent("./src/components/component.timer/timer_component.so");
+	LoadComponent("./components/timer_component.so");
 }
 
 void RenderMainWindow(SDL_Renderer* renderer) {

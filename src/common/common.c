@@ -5,6 +5,10 @@ I_Window c_window = {
 	.h = 400
 };
 
+GameInformation pp_currentGame = {
+	.title = "Super Mario Odyssey"
+};
+
 // SDL stuff
 SDL_Window* SDL_mainWindow = NULL;
 SDL_Window* SDL_contextMenuWindow = NULL;

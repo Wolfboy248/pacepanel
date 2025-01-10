@@ -6,6 +6,7 @@
 #include "input/input.h"
 #include "rendering/elements/text.h"
 #include "timing/timer.h"
+#include "rendering/components/componentHandler.h"
 
 int main(int argc, char* argv[]) {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -77,7 +78,7 @@ int main(int argc, char* argv[]) {
 
 	// CleanupInput();
 	CleanupWindows();
-	CleanupComponent(&componentContext);
+	UnloadComponents();
 	SDL_Quit();
 
 	return 0;

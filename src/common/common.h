@@ -47,6 +47,12 @@ typedef struct {
 	SDL_Color color;
 } Text;
 
+typedef struct {
+	const char* title;
+} GameInformation;
+
+extern GameInformation pp_currentGame;
+
 // SDL stuff
 extern SDL_Window* SDL_mainWindow;
 extern SDL_Window* SDL_contextMenuWindow;

@@ -69,6 +69,10 @@ void DrawText(Text* textStruct, SDL_Renderer* renderer) {
 		posX = textStruct->x + (textStruct->w / 2) - (textSurface->w / 2);
 	}
 
+	if (textStruct->textAlignH == RIGHT) {
+		posX = textStruct->x + textStruct->w - textSurface->w - textStruct->paddingR;
+	}
+
 	if (textStruct->textAlignV == MIDDLE) {
 		posY = textStruct->y + (textStruct->h / 2) - (textSurface->h / 2);
 	}

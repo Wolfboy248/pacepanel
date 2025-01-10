@@ -11,6 +11,7 @@ extern "C" {
 #include "../timing/timer.h"
 	
 	typedef struct {
+		int w, h;
 		Text text;
 	} GraphicElement;
 

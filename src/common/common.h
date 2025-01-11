@@ -24,6 +24,18 @@ enum alignV {
 };
 
 typedef struct {
+	const char* type;
+} PPLComponent;
+
+typedef struct {
+	struct {
+		int windowWidth, windowHeight;
+	} settings;
+	int numComponents;
+	PPLComponent components[64];
+} PPLayout;
+
+typedef struct {
 	int x, y, w, h;
 	const char* windowTitle;
 	SDL_Window* window;

@@ -67,8 +67,16 @@ void UnloadComponents() {
 }
 
 void RenderComponents() {
+	// printf("%d\n", numComponents);
 	for (int i = 0; i < numComponents; i++) {
 		components[i].render(&components[i].context);
+	}
+}
+
+void LoadComponents(PPLayout* layout) {
+	for (int i = 0; i < layout->numComponents; i++) {
+		PPLComponent currComponent = layout->components[i];
+		LoadComponent(format("./components/%s_component.so", currComponent.type));
 	}
 }
 

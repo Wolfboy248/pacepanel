@@ -1,8 +1,8 @@
 #include "common.h"
 
 I_Window c_window = {
-	.w = 200,
-	.h = 400
+	.w = 350,
+	.h = 0
 };
 
 GameInformation pp_currentGame = {

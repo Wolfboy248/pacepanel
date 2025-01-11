@@ -6,6 +6,7 @@
 void LoadComponent(const char* filePath);
 void UnloadComponents();
 void RenderComponents();
+void LoadComponents(PPLayout* layout);
 
 #endif
 

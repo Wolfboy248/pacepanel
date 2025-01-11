@@ -31,6 +31,8 @@ void SetWindowPosition(int x, int y, I_Window* window) {
 }
 
 void SetWindowDimensions(int w, int h, I_Window* window) {
+	if (h <= 24) h = 24;
+	if (w <= 50) w = 50;
 	window->w = w;
 	window->h = h;
 	SDL_SetWindowSize(window->window, w, h);

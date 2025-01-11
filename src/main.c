@@ -53,14 +53,14 @@ int main(int argc, char* argv[]) {
 	// component context
 	componentContext.renderer = renderer;
 
-	InitRendering();
-
 	InitTimer();
 
 	// text
 	if (InitText() < 0) {
 		return -1;
 	}
+
+	InitRendering();
 
 	while (running) {
 		while (SDL_PollEvent(&event)) {

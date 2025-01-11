@@ -6,6 +6,7 @@ extern "C" {
 #endif
 
 #include "../common/common.h"
+#include "../common/common_functions.h"
 #include "../rendering/elements/text.h"
 #include "../rendering/elements/rect.h"
 #include "../timing/timer.h"
@@ -19,6 +20,7 @@ extern "C" {
 		GraphicElement* elements;
 		int numElements;
 		SDL_Renderer* renderer;
+		int h, paddingV, paddingH;
 	} ComponentContext;
 
 	void InitComponent(ComponentContext* context, SDL_Renderer* renderer);
@@ -26,6 +28,8 @@ extern "C" {
 	void RenderComponent(ComponentContext* context);
 
 	void CleanupComponent(ComponentContext* context);
+
+	int GetComponentHeight(ComponentContext* context);
 
 #ifdef __cplusplus
 }

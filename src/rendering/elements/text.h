@@ -10,6 +10,10 @@ typedef struct {
 
 int InitText();
 Text CreateText();
+
+int GetTextHeight(Text* textStruct);
+int GetTextWidth(Text* textStruct);
+
 void DrawText(Text* textStruct, SDL_Renderer* renderer);
 void FreeText();
 

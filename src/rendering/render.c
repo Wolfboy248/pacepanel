@@ -4,10 +4,19 @@
 #include "renderSettingsWindow.h"
 #include "elements/text.h"
 #include "components/componentHandler.h"
+#include "components/layoutHandler.h"
 #include "../debug/debug.h"
 
 void InitRendering() {
-	LoadComponent("./components/timer_component.so");
+	PPLayout currentPPLLayout = {
+		.numComponents = 2,
+		.components = {
+			{"title"},
+			{"timer"}
+		}
+	};
+	LoadLayout("./layouts/default.ppl", &currentPPLLayout);
+	LoadComponents(&currentPPLLayout);
 }
 
 void RenderMainWindow(SDL_Renderer* renderer) {

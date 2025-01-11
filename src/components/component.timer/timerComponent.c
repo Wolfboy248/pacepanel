@@ -10,7 +10,12 @@ void InitComponent(ComponentContext* context, SDL_Renderer* renderer) {
 	testText.textAlignH = RIGHT;
 	testText.paddingR = 5;
 	testText.w = c_window.w;
+	testText.y = c_window.h;
 	context->elements[0].text = testText;
+	context->elements[0].text.fontSize = 32;
+
+	context->h = GetComponentHeight(context);
+	SetWindowDimensions(c_window.w, c_window.h + context->h, &c_window);
 }
 
 void RenderComponent(ComponentContext* context) {

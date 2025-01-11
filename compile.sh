@@ -37,7 +37,7 @@ fi
 
 # Compile the program
 echo "Compiling with flags: $COMMON_FLAGS $EXTRA_FLAGS"
-gcc -Wall -o "$OUT_FILE" $SRC_FILES $COMMON_FLAGS $EXTRA_FLAGS
+gcc -o "$OUT_FILE" $SRC_FILES $COMMON_FLAGS $EXTRA_FLAGS
 
 # Run the program if compilation is successful
 if [[ $? -eq 0 ]]; then

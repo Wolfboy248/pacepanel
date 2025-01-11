@@ -9,6 +9,10 @@ void InitComponent(ComponentContext* context, SDL_Renderer* renderer) {
 	titleText.w = c_window.w;
 	titleText.textAlignH = CENTER;
 	context->elements[0].text = titleText;
+	context->elements[0].text.y = c_window.h;
+	
+	context->h = GetComponentHeight(context);
+	SetWindowDimensions(c_window.w, c_window.h + context->h, &c_window);
 }
 
 void RenderComponent(ComponentContext* context) {
@@ -21,8 +25,7 @@ void RenderComponent(ComponentContext* context) {
 
 	context->elements[0].text.text = pp_currentGame.title;
 
-	DrawText(&context->elements[0].text, context->renderer);
-	printf("%d\n", context->elements[0].text.w);
+	DrawText(&context->elements[0].text, SDL_GetRenderer(SDL_GetWindowFromID(1)));
 }
 
 void CleanupComponent(ComponentContext* context) {

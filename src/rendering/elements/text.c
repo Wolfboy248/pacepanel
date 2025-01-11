@@ -38,9 +38,46 @@ Text CreateText() {
 	return defaultText;
 }
 
-void SetTextSize(Text* textStruct, int w, int h) {
-	textStruct->w = w;
-	textStruct->h = h;
+int GetTextHeight(Text* textStruct) {
+	Font* textObj = LoadFont(textStruct->fontPath, textStruct->fontSize);
+	if (!textObj) {
+		return NULL;
+	}
+
+	SDL_Surface* textSurface = TTF_RenderText_Blended(textObj->font, textStruct->text, textStruct->color);
+	if (!textSurface) {
+		printf("Unable to create text surface! Error: %s\n", TTF_GetError());
+		TTF_CloseFont(textObj->font);
+		free(textObj);
+		return NULL;
+	}
+
+	SDL_FreeSurface(textSurface);
+	TTF_CloseFont(textObj->font);
+	free(textObj);
+
+	return textSurface->h;
+}
+
+int GetTextWidth(Text* textStruct) {
+	Font* textObj = LoadFont(textStruct->fontPath, textStruct->fontSize);
+	if (!textObj) {
+		return NULL;
+	}
+
+	SDL_Surface* textSurface = TTF_RenderText_Blended(textObj->font, textStruct->text, textStruct->color);
+	if (!textSurface) {
+		printf("Unable to create text surface! Error: %s\n", TTF_GetError());
+		TTF_CloseFont(textObj->font);
+		free(textObj);
+		return NULL;
+	}
+
+	SDL_FreeSurface(textSurface);
+	TTF_CloseFont(textObj->font);
+	free(textObj);
+
+	return textSurface->w;
 }
 
 void DrawText(Text* textStruct, SDL_Renderer* renderer) {
@@ -62,6 +99,12 @@ void DrawText(Text* textStruct, SDL_Renderer* renderer) {
 		printf("Unable to create texture from surface! Error: %s\n", TTF_GetError());
 	}
 
+	if (textStruct->w == 0) {
+		textStruct->w = textSurface->w;
+	} else if (textStruct->h == 0) {
+		textStruct->h = textSurface->h;
+	}
+
 	int posX = textStruct->x + textStruct->paddingL;
 	int posY = textStruct->y + textStruct->paddingT;
 
@@ -80,8 +123,7 @@ void DrawText(Text* textStruct, SDL_Renderer* renderer) {
 	SDL_Rect dstRect = { posX, posY, textSurface->w, textSurface->h };
 	SDL_RenderCopy(renderer, textTexture, NULL, &dstRect);
 
-	SetTextSize(textStruct, textSurface->w, textSurface->h);
-	// SDL_Log("%d, %d", textStruct.w, textStruct.h);
+	// SDL_Log("%d, %d", textStruct->w, textStruct->h);
 
 	SDL_FreeSurface(textSurface);
 	SDL_DestroyTexture(textTexture);

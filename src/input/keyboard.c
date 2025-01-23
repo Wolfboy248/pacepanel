@@ -1,5 +1,6 @@
 #include "keyboard.h"
 #include "../timing/timer.h"
+#include "../rendering/components/layoutHandler.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -30,6 +31,10 @@ void HandleKeyboardInput(SDL_Event event) {
 
 			case SDLK_d:
 				StopTimer();
+				break;
+
+			case SDLK_o:
+				LoadLayout("./layouts/test.ppl", &currentPPLLayout);
 				break;
 
 			default:

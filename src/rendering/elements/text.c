@@ -25,6 +25,19 @@ Font* LoadFont(const char* fontPath, int fontSize) {
 	return text;
 }
 
+Text CreateHeader1() {
+	Text header1Text = {
+		.x = 0,
+		.y = 0,
+		.color = c_white,
+		.fontPath = "fonts/JetBrainsMonoNerdFont-Medium.ttf",
+		.fontSize = 40,
+		.text = "Heading 1"
+	};
+
+	return header1Text;
+}
+
 Text CreateText() {
 	Text defaultText = {
 		.x = 0,
@@ -41,7 +54,7 @@ Text CreateText() {
 int GetTextHeight(Text* textStruct) {
 	Font* textObj = LoadFont(textStruct->fontPath, textStruct->fontSize);
 	if (!textObj) {
-		return NULL;
+		return 0;
 	}
 
 	SDL_Surface* textSurface = TTF_RenderText_Blended(textObj->font, textStruct->text, textStruct->color);
@@ -49,20 +62,22 @@ int GetTextHeight(Text* textStruct) {
 		printf("Unable to create text surface! Error: %s\n", TTF_GetError());
 		TTF_CloseFont(textObj->font);
 		free(textObj);
-		return NULL;
+		return 0;
 	}
+
+	int textHeight = textSurface->h;
 
 	SDL_FreeSurface(textSurface);
 	TTF_CloseFont(textObj->font);
 	free(textObj);
 
-	return textSurface->h;
+	return textHeight;
 }
 
 int GetTextWidth(Text* textStruct) {
 	Font* textObj = LoadFont(textStruct->fontPath, textStruct->fontSize);
 	if (!textObj) {
-		return NULL;
+		return 0;
 	}
 
 	SDL_Surface* textSurface = TTF_RenderText_Blended(textObj->font, textStruct->text, textStruct->color);
@@ -70,14 +85,16 @@ int GetTextWidth(Text* textStruct) {
 		printf("Unable to create text surface! Error: %s\n", TTF_GetError());
 		TTF_CloseFont(textObj->font);
 		free(textObj);
-		return NULL;
+		return 0;
 	}
+
+	int textWidth = textSurface->w;
 
 	SDL_FreeSurface(textSurface);
 	TTF_CloseFont(textObj->font);
 	free(textObj);
 
-	return textSurface->w;
+	return textWidth;
 }
 
 void DrawText(Text* textStruct, SDL_Renderer* renderer) {

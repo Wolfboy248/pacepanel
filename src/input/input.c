@@ -37,14 +37,14 @@ void HandleInput(SDL_Event event) {
 	if (event.type == SDL_WINDOWEVENT) {
 		// focus
 		if (event.window.event == SDL_WINDOWEVENT_FOCUS_GAINED) {
-			SDL_Window* focusedWindow = SDL_GetWindowFromID(event.window.windowID);
-			if (focusedWindow) {
-				const char* winTitle = SDL_GetWindowTitle(focusedWindow);
+			SDL_focusedWindow = SDL_GetWindowFromID(event.window.windowID);
+			if (SDL_focusedWindow) {
+				const char* winTitle = SDL_GetWindowTitle(SDL_focusedWindow);
 				const char* prevWinTitle;
 
 				if (SDL_prevFocusedWindow) {
 					prevWinTitle = SDL_GetWindowTitle(SDL_prevFocusedWindow);
-					int winID = SDL_GetWindowID(focusedWindow);
+					int winID = SDL_GetWindowID(SDL_focusedWindow);
 					int prevWinID = SDL_GetWindowID(SDL_prevFocusedWindow);
 					SDL_Log("Window selected: %s (%d) | Previous window: %s (%d)", winTitle, winID, prevWinTitle, prevWinID);
 
@@ -58,7 +58,7 @@ void HandleInput(SDL_Event event) {
 					SDL_Log("Window selected: %s", winTitle);
 				}
 
-				SDL_prevFocusedWindow = focusedWindow;
+				SDL_prevFocusedWindow = SDL_focusedWindow;
 			} else {
 				SDL_Log("No window found");
 			}
@@ -72,11 +72,10 @@ void HandleInput(SDL_Event event) {
 
 				printf("Closing window %s\n", winTitle);
 
-				if (windowToClose == SDL_settingsWindow) {
-					c_settingsWindow.isOpen = 0;
-					SDL_DestroyWindow(c_settingsWindow.window);
-					SDL_DestroyRenderer(c_settingsWindow.renderer);
-					SDL_settingsWindow = NULL;
+				for (int i = 0; i < numWindows; i++) {
+					if (windowToClose == c_windows[i]->window) {
+						CloseWindow(c_windows[i]);
+					}
 				}
 			}
 		}

@@ -7,6 +7,7 @@
 #include "rendering/elements/text.h"
 #include "timing/timer.h"
 #include "rendering/components/componentHandler.h"
+#include "rendering/components/layoutHandler.h"
 
 int main(int argc, char* argv[]) {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -17,6 +18,8 @@ int main(int argc, char* argv[]) {
 	if (debugMode) {
 		SDL_debugWindow = CreateDebugWindow(SDL_mainWindow);
 	}
+
+	InitLayout();
 
 	SDL_mainWindow = SDL_CreateWindow(
 		c_title,
@@ -34,6 +37,9 @@ int main(int argc, char* argv[]) {
 	}
 
 	c_window.window = SDL_mainWindow;
+
+	c_windows[numWindows] = &c_window;
+	numWindows++;
 
 	// InitInput();
 
@@ -61,6 +67,8 @@ int main(int argc, char* argv[]) {
 	}
 
 	InitRendering();
+
+	isInit = 1;
 
 	while (running) {
 		while (SDL_PollEvent(&event)) {

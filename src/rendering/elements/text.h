@@ -9,7 +9,9 @@ typedef struct {
 } Font;
 
 int InitText();
+
 Text CreateText();
+Text CreateHeader1();
 
 int GetTextHeight(Text* textStruct);
 int GetTextWidth(Text* textStruct);

@@ -49,10 +49,34 @@ char* intToChar(int num) {
 	return buffer;
 }
 
+char* endptr;
+
+int charToInt(const char* str) {
+	int num = (int)strtol(str, &endptr, 10);
+
+	return num;
+}
+
+void CloseWindow(I_Window* windowToClose) {
+	for (int i = 0; i < numWindows; i++) {
+		if (SDL_GetWindowID(c_windows[i]->window) == SDL_GetWindowID(windowToClose->window)) {
+			
+			c_windows[i]->isOpen = 0;
+			SDL_DestroyWindow(c_windows[i]->window);
+			SDL_DestroyRenderer(c_windows[i]->renderer);
+			c_windows[i]->window = NULL;
+		}
+	}
+}
+
 void A_Quit() {
 	int changes = 0;
 	if (!changes) {
 		running = 0;
 	}
+}
+
+void A_SettingsClose() {
+	c_settingsWindow.isOpen = 0;
 }
 

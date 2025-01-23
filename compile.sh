@@ -6,7 +6,7 @@ OS=$(uname)
 # Set common flags
 SRC_FILES=$(find . -name '*.c' ! -path './src/components/*')
 OUT_FILE="pacePanel"
-COMMON_FLAGS="-lSDL2 -lSDL2_ttf -rdynamic -ldl"
+COMMON_FLAGS="-lSDL2 -lSDL2_ttf -rdynamic -ldl -lmxml"
 
 COMPILE_LIB_SCRIPTS=$(find . -name 'compileLib.sh')
 

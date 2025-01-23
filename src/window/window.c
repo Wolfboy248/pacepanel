@@ -33,6 +33,9 @@ SDL_Window* CreateContextMenu(SDL_Window* parentWindow) {
 		return NULL;
 	}
 
+	c_windows[numWindows] = &c_contextMenuWindow;
+	numWindows++;
+
 	return childWindow;
 }
 
@@ -42,7 +45,7 @@ SDL_Window* CreateSettingsWindow(SDL_Window* parentWindow) {
 		c_settingsWindow.x,
 		c_settingsWindow.y,
 		c_settingsWindow.w, c_settingsWindow.h,
-		SDL_WINDOW_ALWAYS_ON_TOP | SDL_WINDOW_MAXIMIZED
+		SDL_WINDOW_ALWAYS_ON_TOP | SDL_WINDOW_RESIZABLE | SDL_WINDOW_MINIMIZED
 	);
 	c_settingsWindow.window = childWindow;
 
@@ -60,6 +63,11 @@ SDL_Window* CreateSettingsWindow(SDL_Window* parentWindow) {
 		SDL_Log("Error creating child window! Error: %s", SDL_GetError());
 		return NULL;
 	}
+
+	c_mouse.LMBDown = 0;
+
+	c_windows[numWindows] = &c_settingsWindow;
+	numWindows++;
 
 	return childWindow;
 }
@@ -87,6 +95,9 @@ SDL_Window* CreateDebugWindow(SDL_Window* parentWindow) {
 		SDL_Log("Error creating child window! Error: %s", SDL_GetError());
 		return NULL;
 	}
+
+	c_windows[numWindows] = &c_debugWindow;
+	numWindows++;
 
 	return childWindow;
 }

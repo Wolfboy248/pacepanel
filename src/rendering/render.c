@@ -5,17 +5,8 @@
 #include "elements/text.h"
 #include "components/componentHandler.h"
 #include "components/layoutHandler.h"
-#include "../debug/debug.h"
 
-void InitRendering() {
-	PPLayout currentPPLLayout = {
-		.numComponents = 2,
-		.components = {
-			{"title"},
-			{"timer"}
-		}
-	};
-	LoadLayout("./layouts/default.ppl", &currentPPLLayout);
+void InitRendering() {	
 	LoadComponents(&currentPPLLayout);
 }
 

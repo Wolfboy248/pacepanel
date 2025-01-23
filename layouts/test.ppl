@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout>
 <settings>
-	<windowWidth>200</windowWidth>
-	<windowHeight>300</windowHeight>
+	<windowWidth>500</windowWidth>
+	<windowHeight>1600</windowHeight>
 </settings>
 <components>
-	<component>
-		<type>Title</type>
-		<backgroundCol>#00ff00</backgroundCol>
-	</component>
 	<component>
 		<type>Timer</type>
 		<backgroundCol>#ff0000</backgroundCol>

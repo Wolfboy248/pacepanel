@@ -4,11 +4,13 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include "common_colours.h"
 
 enum CMDs {
 	CMD_Invalid,
 	CMD_Quit,
 	CMD_OpenSettings,
+	CMD_CloseSettings,
 };
 
 enum alignH {
@@ -59,6 +61,17 @@ typedef struct {
 	SDL_Color color;
 } Text;
 
+// DOC //
+// int x, y, w, h
+// bool fill
+typedef struct {
+	int x, y, w, h;
+	int cornerRadius;
+	int fill;
+	int borderWidth;
+	SDL_Color color;
+} Rect;
+
 typedef struct {
 	const char* title;
 } GameInformation;
@@ -71,10 +84,14 @@ extern SDL_Window* SDL_contextMenuWindow;
 extern SDL_Window* SDL_debugWindow;
 extern SDL_Window* SDL_settingsWindow;
 extern SDL_Window* SDL_prevFocusedWindow;
+extern SDL_Window* SDL_focusedWindow;
 
 // states
 // context menu
 extern int contextMenuOpen;
+
+extern int numWindows;
+extern I_Window* c_windows[128];
 
 extern I_Window c_window;
 extern I_Window c_contextMenuWindow;
@@ -85,7 +102,10 @@ extern I_Mouse c_mouse;
 
 extern int running;
 extern int debugMode;
+extern int isInit;
 
 extern const char* c_title;
+	
+extern PPLayout currentPPLLayout;
 
 #endif // COMMON_H

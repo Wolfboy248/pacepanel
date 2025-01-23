@@ -4,9 +4,9 @@ void InitRect() {
 
 }
 
-void DrawRect(int x, int y, int w, int h, SDL_Color color, SDL_Renderer* renderer) {
-	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-	SDL_Rect rect = {x, y, w, h};
+void DrawRect(Rect inpRect, SDL_Renderer* renderer) {
+	SDL_SetRenderDrawColor(renderer, inpRect.color.r, inpRect.color.g, inpRect.color.b, inpRect.color.a);
+	SDL_Rect rect = {inpRect.x, inpRect.y, inpRect.w, inpRect.h};
 	SDL_RenderFillRect(renderer, &rect);
 }
 

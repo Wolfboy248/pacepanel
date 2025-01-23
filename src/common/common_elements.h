@@ -11,6 +11,7 @@ typedef struct {
 	enum alignH alignmentH;
 	enum alignV alignmentV;
 	int paddingL, paddingR, paddingT, paddingB;
+	Rect bg;
 	enum CMDs cmd;
 } Button;
 

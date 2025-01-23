@@ -52,6 +52,8 @@ void MouseChecks() {
 	} else if (!c_mouse.LMBDown) {
 		dragging = 0;
 	}
+
+	// printf("Drag: %d, Down: %d\n", dragging, c_mouse.LMBDown);
 }
 
 void HandleMouseInput(SDL_Event event) {
@@ -68,13 +70,13 @@ void HandleMouseInput(SDL_Event event) {
 			windowHoverArea = BODY;
 		}
 
-		if (windowHoverArea != BODY) {
+		if (windowHoverArea != BODY && SDL_focusedWindow == c_window.window) {
 			SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_SIZEWE));
 		} else {
 			SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW));
 		}
 
-		if (dragging) {
+		if (dragging && SDL_focusedWindow == c_window.window) {
 			// printf("MouseX Abs: %d, DragOffsetX: %d, RelativeMov: %d\n", c_mouse.x + c_window.x, dragOffsetX, c_mouse.x - dragOffsetX + c_window.x);
 			// SDL_SetWindowPosition(SDL_mainWindow, c_mouse.x - dragOffsetX + c_window.x, c_mouse.y - dragOffsetY + c_window.y);
 			if (windowClickArea == BODY) {
@@ -124,7 +126,7 @@ void HandleMouseInput(SDL_Event event) {
 			c_mouse.RMBDown = 1;
 
 			// Context menu
-			if (!SDL_contextMenuWindow) {
+			if (!SDL_contextMenuWindow && SDL_focusedWindow == c_window.window) {
 				SDL_contextMenuWindow = CreateContextMenu(SDL_mainWindow);
 
 				if (SDL_contextMenuWindow) {
@@ -137,13 +139,17 @@ void HandleMouseInput(SDL_Event event) {
 				return;
 			}
 		} else if (event.button.button == SDL_BUTTON_LEFT) {
+			// what the fuck
 			if (!c_mouse.LMBDown) {
 				c_mouse.LMBClick = 1;
+
+				c_mouse.LMBDown = 1;
+
 			} else {
 				c_mouse.LMBClick = 1;
-			}
 
-			c_mouse.LMBDown = 1;
+				c_mouse.LMBDown = 1;
+			}
 		}
 	}
 }

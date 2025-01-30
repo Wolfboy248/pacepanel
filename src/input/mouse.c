@@ -87,6 +87,9 @@ void HandleMouseInput(SDL_Event event) {
 				SetWindowDimensions((c_window.x + c_window.w) - c_mouse.absX, c_window.h, &c_window);
 				SetWindowPosition(c_mouse.absX, c_window.y, &c_window);
 			}
+
+			currentPPLLayout.settings.windowWidth = c_window.w;
+			currentPPLLayout.settings.windowHeight = c_window.h;
 		} else {
 			// printf("MouseX Abs: %d\n", c_mouse.x + c_window.x);
 		}

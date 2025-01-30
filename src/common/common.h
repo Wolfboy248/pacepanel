@@ -2,6 +2,7 @@
 #define COMMON_H
 
 #include <stdio.h>
+#include <unistd.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include "common_colours.h"
@@ -11,6 +12,8 @@ enum CMDs {
 	CMD_Quit,
 	CMD_OpenSettings,
 	CMD_CloseSettings,
+	CMD_SaveLayout,
+	CMD_LoadLayoutFromFile,
 };
 
 enum alignH {
@@ -30,9 +33,12 @@ typedef struct {
 } PPLComponent;
 
 typedef struct {
-	struct {
-		int windowWidth, windowHeight;
-	} settings;
+	int windowWidth, windowHeight;
+} PPLayoutSettings;
+
+typedef struct {
+	const char* filePath;
+	PPLayoutSettings settings;
 	int numComponents;
 	PPLComponent components[64];
 } PPLayout;
@@ -103,8 +109,10 @@ extern I_Mouse c_mouse;
 extern int running;
 extern int debugMode;
 extern int isInit;
+extern int openFileDialog;
 
 extern const char* c_title;
+extern char workingDir[256];
 	
 extern PPLayout currentPPLLayout;
 

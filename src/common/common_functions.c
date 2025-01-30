@@ -80,3 +80,7 @@ void A_SettingsClose() {
 	c_settingsWindow.isOpen = 0;
 }
 
+void A_LoadLayoutFromFile() {
+	openFileDialog = 1;
+}
+

@@ -34,7 +34,7 @@ void HandleKeyboardInput(SDL_Event event) {
 				break;
 
 			case SDLK_o:
-				LoadLayout("./layouts/test.ppl", &currentPPLLayout);
+				LoadLayout("./layouts/testing.ppl", &currentPPLLayout);
 				break;
 
 			default:

@@ -42,7 +42,7 @@ gcc -o "$OUT_FILE" $SRC_FILES $COMMON_FLAGS $EXTRA_FLAGS
 # Run the program if compilation is successful
 if [[ $? -eq 0 ]]; then
     echo "Compilation successful. Running $OUT_FILE..."
-    ./"$OUT_FILE"
+    TINYFD_FORCE_GUI=1 ./"$OUT_FILE"
 else
     echo "Compilation failed."
     exit 1

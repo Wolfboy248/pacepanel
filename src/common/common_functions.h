@@ -3,6 +3,8 @@
 
 #include "common.h"
 
+#include "../rendering/tinyfiledialogs/tinyfiledialogs.h"
+
 char* format(const char* format, ...);
 void SetWindowPosition(int x, int y, I_Window* window);
 void SetWindowDimensions(int w, int h, I_Window* window);
@@ -14,6 +16,8 @@ void CloseWindow(I_Window* window);
 void A_Quit();
 
 void A_SettingsClose();
+
+void A_LoadLayoutFromFile();
 
 #endif
 

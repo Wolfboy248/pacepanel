@@ -6,7 +6,18 @@
 #include "components/componentHandler.h"
 #include "components/layoutHandler.h"
 
-void InitRendering() {	
+void InitRendering() {
+	// PPLayout testLayout = {
+	// 	.components = {
+	// 		{"Title"},
+	//	}
+	// };
+
+	// testLayout.settings.windowWidth = 200;
+	// testLayout.settings.windowHeight = 300;
+
+	// SaveLayout("layouts/testing.ppl", &testLayout);
+
 	LoadComponents(&currentPPLLayout);
 }
 

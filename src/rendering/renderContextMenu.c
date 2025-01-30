@@ -12,6 +12,8 @@ typedef struct {
 // h = 20
 ContextMenuButtonE buttons[] = {
 	{"Settings", CMD_OpenSettings},
+	{"Load layout", CMD_LoadLayoutFromFile},
+	{"Save layout", CMD_SaveLayout},
 	{"Quit", CMD_Quit},
 };
 

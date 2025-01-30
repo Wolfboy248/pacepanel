@@ -1,5 +1,6 @@
 #include "button.h"
 #include "../../window/settingsWindow.h"
+#include "../components/layoutHandler.h"
 
 int IsButtonHover(I_Window desiredWindow, Button button) {
 	int isHover;
@@ -33,6 +34,15 @@ void DrawButton(Button button, I_Window desiredWindow, SDL_Renderer* renderer) {
 				break;
 			case CMD_OpenSettings:
 				OpenSettings();
+				break;
+			case CMD_CloseSettings:
+				A_SettingsClose();
+				break;
+			case CMD_SaveLayout:
+				SaveLayout(currentPPLLayout.filePath, &currentPPLLayout);
+				break;
+			case CMD_LoadLayoutFromFile:
+				A_LoadLayoutFromFile();
 				break;
 			default:
 				printf("Invalid command\n");

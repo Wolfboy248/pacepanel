@@ -1,17 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<layout>
-<settings>
-	<windowWidth>200</windowWidth>
-	<windowHeight>300</windowHeight>
-</settings>
-<components>
-	<component>
-		<type>Title</type>
-		<backgroundCol>#00ff00</backgroundCol>
-	</component>
-	<component>
-		<type>Timer</type>
-		<backgroundCol>#ff0000</backgroundCol>
-	</component>
-</components>
-</layout>
+<?xml version="1.0" encoding="utf-8"?><layout><settings><windowWidth>418</windowWidth><windowHeight>67</windowHeight></settings><components><component><type>Title</type></component><component><type>Timer</type></component></components></layout>

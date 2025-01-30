@@ -60,8 +60,10 @@ I_Mouse c_mouse = {
 int running = 1;
 int debugMode = 0; // TODO: PLEASE IMPROVE DEBUG MODE IT SUCKS BALLS
 int isInit = 0;
+int openFileDialog = 0;
 
 const char* c_title = "PacePanel";
+char workingDir[256];
 
 PPLayout currentPPLLayout = {};
 

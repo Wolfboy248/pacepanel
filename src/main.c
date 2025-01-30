@@ -8,8 +8,15 @@
 #include "timing/timer.h"
 #include "rendering/components/componentHandler.h"
 #include "rendering/components/layoutHandler.h"
+#include "settings/settings.h"
 
 int main(int argc, char* argv[]) {
+	if (getcwd(workingDir, sizeof(workingDir)) != NULL) {
+		printf("Current working dir: %s\n", workingDir);
+	} else {
+		printf("Couldnt get working dir\n");
+	}
+
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		SDL_Log("Unable to init SDL! Error: %s", SDL_GetError());
 		return 1;
@@ -19,7 +26,7 @@ int main(int argc, char* argv[]) {
 		SDL_debugWindow = CreateDebugWindow(SDL_mainWindow);
 	}
 
-	InitLayout();
+	LoadGlobalSettings();
 
 	SDL_mainWindow = SDL_CreateWindow(
 		c_title,
@@ -73,6 +80,20 @@ int main(int argc, char* argv[]) {
 	while (running) {
 		while (SDL_PollEvent(&event)) {
 			HandleInput(event);
+		}
+
+		if (openFileDialog) {
+			openFileDialog = 0;
+
+			const char* filters[1] = { "*.ppl" };
+			const char* filename = tinyfd_openFileDialog("Open PP Layout", "~/", 1, filters, NULL, 0);
+
+			if (filename) {
+				printf("%s\n", filename);
+				LoadLayout(filename, &currentPPLLayout);
+			} else {
+				printf("failed to load PPL file\n");
+			}
 		}
 
 		GetWindowInformation(SDL_mainWindow);

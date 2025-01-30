@@ -10,6 +10,7 @@
 
 void InitLayout();
 void LoadLayout(const char* filePath, PPLayout* layout);
+void SaveLayout(const char* filePath, PPLayout* layout);
 
 #endif
 
